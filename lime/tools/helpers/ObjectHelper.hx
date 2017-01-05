@@ -69,12 +69,10 @@ import haxe.ds.StringMap;
 			
 		} else if (Std.is (v, Array)) { // array
 			
-			var result = Type.createInstance (Type.getClass (v), []);
+			var result = cast Type.createInstance (Type.getClass (v), []);
 			
-			untyped {
-				for (ii in 0...v.length) {
-					result.push (deepCopy (v[ii]));
-				}
+			for (ii in 0...(cast v:Array<Dynamic>).length) {
+				(cast result:Array<Dynamic>).push (deepCopy ((cast v:Array<Dynamic>)[ii]));
 			}
 			
 			return result;
